@@ -6,6 +6,7 @@ const CreatorForm = () => {
         e.preventDefault();
         // some submission function here to post to the spring db
         //hash name and word
+        //redirect to creatorView page... route to redirect to will be in app.js
     }
     return (
         <div>

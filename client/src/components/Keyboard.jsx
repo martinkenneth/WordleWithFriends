@@ -14,10 +14,28 @@ const Keyboard = (props) => {
             props.setPrevGuesses = updateGuesses;
             props.setCurrGuess("");
         }
+
+        //add in case where the submitted current guess is the correct word
+        //  record the length of prev guesses (score) -> save as a state value
     }
 
     // 2d array for letters
     // const letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','ENTER','DELETE'];
+    /*
+    letter object
+    letter value
+    status ----> have 3 options: incorrect, inWord, inRightSpot (also have specific styling for ENTER and DELETE)
+            specific css for each option
+
+    constructor
+    getters and setters
+    
+    for loop to instantiate all letters
+    push into an array
+    end up with an array of letter objects
+    save letter array into state variable
+
+    */
     const letters = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'], ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'], ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DELETE']];
     return (
         <div>

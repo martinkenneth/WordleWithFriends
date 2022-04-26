@@ -9,6 +9,7 @@ const Leaderboard = () => {
     */
 
     /*
+    extra, dont worry about this right now
     onclick function that resorts the guessers state variable via time
     secondary sorter would be number of guesses
     */
