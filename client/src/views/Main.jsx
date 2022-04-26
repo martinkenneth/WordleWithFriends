@@ -5,7 +5,6 @@ import Header from "../components/Header";
 const Main = () => {
     return (
         <div>
-            <h1>Test</h1>
             <Header />
             <CreatorForm />
         </div>
