@@ -9,10 +9,12 @@ const GuesserView = () => {
     const [prevGuesses, setPreGuesses] = useState([]);
     const [currGuess, setCurrGuess] = useState("");
 
+    const [score, setScore] = useState(7);
+
     return (
         <div>
             <Header/>
-            {/* insert creator's name below */}
+            {/* insert creator's name below this will come from the link*/}
             <h2>You have 6 tries to guess _____'s word</h2>
             <table>
                 <tbody>
@@ -42,10 +44,19 @@ const GuesserView = () => {
                         );
                     })}
                     {/* how do we output empty boxes... */}
+                    {/* {() => {
+                        let emptyBoxes = 
+                        (for i=0; i < 5-prevGuesses.length; i++){
+                            emptyBoxes.push(<div className=""></div>)
+                        }
+                        return emptyBoxes;
+                    }} */}
                 </tbody>
             </table>
             {/* insert keyboard component here */}
             <Keyboard setCurrGuess={setCurrGuess} setPreGuesses={setPreGuesses} prevGuesses={prevGuesses} currGuess={currGuess}/>
+
+            {/* ternary to check if the word was guessed (use Score state if score < 7) display modal*/}
         </div>
     )
 }
