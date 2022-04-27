@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from "./GuesserForm.module.css";
 
-const GuesserForm = () => {
+const GuesserForm = (props) => {
 
-    //get the score from the state variable in guesserview
+    const score = props.score;
+    const word = props.word;
 
     const handleSubmission = (e) => {
         e.preventDefault();
@@ -14,6 +15,7 @@ const GuesserForm = () => {
 
     return (
         <div>
+            <h1>Congradulations! You got it! The word was <span>{word}</span>!</h1>
             <form className={styles.guesserForm} onSubmit={handleSubmission}>
                 <input type="text" name="name" id="name" />
                 <input type="submit" value="Submit" />

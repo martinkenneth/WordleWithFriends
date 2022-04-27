@@ -10,6 +10,15 @@ const GuesserView = () => {
     const [currGuess, setCurrGuess] = useState("");
 
     const [score, setScore] = useState(7);
+    const [word, setWord] = useState("");
+
+    //this probably won't work because what if the word has multiple occurences of the same letter
+    // !word.includes(letter) 
+    // ? <div className={styles.incorrect} key={idx}>{letter}</div>
+    // : word.indexOf(letter) === idx
+    //     ? <div className={letter.rightSpot} key={idx}>{letter}</div>
+    //     : <div className={letter.wrongSpot} key={idx}>{letter}</div>
+    
 
     return (
         <div>
@@ -54,7 +63,7 @@ const GuesserView = () => {
                 </tbody>
             </table>
             {/* insert keyboard component here */}
-            <Keyboard setCurrGuess={setCurrGuess} setPreGuesses={setPreGuesses} prevGuesses={prevGuesses} currGuess={currGuess}/>
+            <Keyboard setCurrGuess={setCurrGuess} setPreGuesses={setPreGuesses} prevGuesses={prevGuesses} currGuess={currGuess} score={score} setScore={setScore} word={word}/>
 
             {/* ternary to check if the word was guessed (use Score state if score < 7) display modal*/}
         </div>
