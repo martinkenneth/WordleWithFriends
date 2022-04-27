@@ -30,9 +30,10 @@ const Keyboard = (props) => {
         add currGuess to prevGuesses
         clear currGuess
         */
-        if (letter.equals("ENTER") && props.currGuess.length === 5){
-            let updateGuesses = props.prevGuesses.add(props.currGuess);
-            props.setPrevGuesses = updateGuesses;
+        if (letter === "ENTER" && props.currGuess.length === 5){
+            let updateGuesses = props.prevGuesses;
+            updateGuesses.push(props.currGuess);
+            props.setPrevGuesses(updateGuesses);
 
             //for loop through currGuess change letter status in dictionary if needed;
 
@@ -43,6 +44,16 @@ const Keyboard = (props) => {
         //  record the length of prev guesses (score) -> save as a state value
         if (props.prevGuesses[props.prevGuesses.length-1] === props.word){
             props.setScore(props.prevGuesses.length);
+        }
+        
+        if (letter !== "ENTER" && letter !== "DELETE" && props.currGuess.length < 5){
+            let tempGuess = props.currGuess;
+            tempGuess += letter;
+            props.setCurrGuess(tempGuess);
+        }
+        else if (letter === "DELETE"){
+            let tempGuess = props.currGuess.slice(0,-1);
+            props.setCurrGuess(tempGuess);
         }
     }
 
@@ -58,15 +69,14 @@ const Keyboard = (props) => {
 
     return (
         <div>
-            <h1>Something!</h1>
             {/* for every letter output a buttonComponent with value as letter */}
-            {letterVals.map((row) => {
+            {letterVals.map((row, i) => {
                 return (
-                    <div className="keyboardRow">
-                        {row.map((letter) => {
+                    <div className="keyboardRow" style={{display: "flex"}} key={i}>
+                        {row.map((letter, idx) => {
                             const status = letterDictionary[letter];
                             return (
-                                <Letter className={"styles." + status} letter={letter} onClick={(e, letter) => clickKeyboard(letter)} />
+                                <Letter className={"styles." + status} onClickFunction={clickKeyboard} letter={letter} key={idx}/>
                             );
                         })}
                     </div>

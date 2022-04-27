@@ -1,19 +1,23 @@
-import "./App.css";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Main from "./views/Main";
+import './App.css';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Main from './views/Main';
+import GuesserView from './views/GuesserView';
+import CreatorView from './views/CreatorView';
 
 function App() {
-    return (
-        <Switch>
-            <Route path="/examples">
-                <Main />
-            </Route>
-            {/* you can also use redirect to force a route to another route */}
-            <Route path="/">
-                <Redirect to="/examples" />
-            </Route>
-        </Switch>
-    );
+  return (
+    <Switch>
+      <Route path="/guesserView">
+        <GuesserView/>
+      </Route>
+      <Route path="/creatorView">
+        <CreatorView/>
+      </Route>
+      <Route path="/">
+        <Main />
+      </Route>
+    </Switch>
+  );
 }
 
 export default App;
