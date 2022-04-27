@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <div>Wordles With Friends</div>
+        <h1>Wordles With Friends</h1>
     )
 }
 

@@ -2,16 +2,20 @@
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Main from './views/Main';
+import GuesserView from './views/GuesserView';
+import CreatorView from './views/CreatorView';
 
 function App() {
   return (
     <Switch>
-      <Route path="/examples">
-        <Main />
+      <Route path="/guesserView">
+        <GuesserView/>
       </Route>
-    {/* you can also use redirect to force a route to another route */}
+      <Route path="/creatorView">
+        <CreatorView/>
+      </Route>
       <Route path="/">
-        <Redirect to='/examples' />
+        <Main />
       </Route>
     </Switch>
   );
