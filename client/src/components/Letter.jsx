@@ -3,7 +3,7 @@ import React from 'react';
 const Letter = (props) => {
     return (
         <div>
-            <button>{props.letter}</button>
+            <button onClick={(e) => {props.onClickFunction(props.letter)}}>{props.letter}</button>
         </div>
     )
 }
