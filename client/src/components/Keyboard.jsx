@@ -31,29 +31,49 @@ const Keyboard = (props) => {
         clear currGuess
         */
         if (letter === "ENTER" && props.currGuess.length === 5){
-            let updateGuesses = props.prevGuesses;
-            updateGuesses.push(props.currGuess);
-            props.setPrevGuesses(updateGuesses);
+            let currGuessDict = {};
+            for (let i = 0; i < props.word.length; i++) {
+                for (let j = 0; j < props.currGuess.length; j++) {
+                    if (props.currGuess[j] === props.word[i]){
+                        if (i === j){
+                            currGuessDict[props.currGuess[j]] = "rightSpot";
+                        }
+                        else {
+                            currGuessDict[props.currGuess[j]] = "wrongSpot";
+                        }
+                    }
+                    else if (props.currGuess[j] !== props.word[i] && i===j) {
+                        currGuessDict[props.currGuess[j]] = "incorrect";
+                    }
+                }
+            }
+            props.setPrevGuesses([...props.prevGuesses, currGuessDict]);
 
             //for loop through currGuess change letter status in dictionary if needed;
 
-            props.setCurrGuess("");
+            props.setCurrGuess([]);
         }
 
         //add in case where the submitted current guess is the correct word
         //  record the length of prev guesses (score) -> save as a state value
-        if (props.prevGuesses[props.prevGuesses.length-1] === props.word){
-            props.setScore(props.prevGuesses.length);
+        if (props.prevGuesses.length > 0){
+
+            let lastGuess = "";
+            console.log(props.prevGuesses[props.prevGuesses.length-1]);
+            for (const letter in props.prevGuesses[props.prevGuesses.length-1]){
+                lastGuess += letter;
+            }
+            if (lastGuess === props.word){
+                props.setScore(props.prevGuesses.length);
+            }
         }
         
         if (letter !== "ENTER" && letter !== "DELETE" && props.currGuess.length < 5){
-            let tempGuess = props.currGuess;
-            tempGuess += letter;
-            props.setCurrGuess(tempGuess);
+            props.setCurrGuess([...props.currGuess, letter]);
         }
         else if (letter === "DELETE"){
-            let tempGuess = props.currGuess.slice(0,-1);
-            props.setCurrGuess(tempGuess);
+            props.currGuess.pop();
+            props.setCurrGuess([...props.currGuess]);
         }
     }
 
@@ -82,7 +102,7 @@ const Keyboard = (props) => {
                     </div>
                 )})}
         </div>
-    )
+    );
 }
 
 export default Keyboard;
