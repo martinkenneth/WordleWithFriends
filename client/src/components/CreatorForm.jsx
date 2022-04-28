@@ -170,6 +170,7 @@ const CreatorForm = () => {
                         <span style={{ padding: "0px 9px" }}>R</span>
                         <span style={{ padding: "0px 8px" }}>D</span>
                         <span style={{ padding: "0px 11px" }}>L</span>
+                        <span style={{ padding: "0px 10px" }}>E</span>
                     </a>{" "}
                     game and send the share link with your friends!
                 </p>

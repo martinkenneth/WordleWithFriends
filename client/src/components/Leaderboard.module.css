@@ -2,11 +2,12 @@
     /* background-color: aqua; */
     margin-top: 50px;
     width: 450px;
+    color: white;
 }
 .Leaderboard p {
     font-size: 20pt;
     font-weight: 900px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(255, 255, 255);
 }
 
 .Leaderboard > table {
