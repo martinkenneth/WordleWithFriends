@@ -1,0 +1,12 @@
+.incorrect {
+    background-color: #3a3a3b;
+}
+
+.rightSpot {
+    background-color: #538d4e;
+}
+
+.wrongSpot {
+    background-color: #b59f3b;
+    font-weight: bolder;
+}
