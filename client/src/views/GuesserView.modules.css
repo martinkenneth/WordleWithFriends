@@ -3,6 +3,7 @@
     width: 25px;
     height: 25px;
     color: white;
+    text-align: center;
 }
 .incorrect {
     background-color: #3a3a3b;
@@ -14,9 +15,9 @@
 
 .wrongSpot {
     background-color: #b59f3b;
+    font-weight: bolder;
 }
 
 .currGuessLetter {
     background-color: #121214;
-    color: red;
 }

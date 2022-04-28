@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Letter from './Letter';
+import style from "./Keyboard.modules.css";
 
 const Keyboard = (props) => {
     
@@ -30,42 +31,46 @@ const Keyboard = (props) => {
         add currGuess to prevGuesses
         clear currGuess
         */
-        if (letter === "ENTER" && props.currGuess.length === 5){
-            let currGuessDict = {};
-            for (let i = 0; i < props.word.length; i++) {
-                for (let j = 0; j < props.currGuess.length; j++) {
-                    if (props.currGuess[j] === props.word[i]){
-                        if (i === j){
-                            currGuessDict[props.currGuess[j]] = "rightSpot";
+
+        //creating string of the last guess to compare to the word string in order to trigger setScore
+        let lastGuess = "";
+        
+            if (letter === "ENTER" && props.currGuess.length === 5){
+                let currGuessArr = [];
+                for (let i = 0; i < props.currGuess.length; i++) {
+                    let letterObj = {};
+                    letterObj["letterVal"] = props.currGuess[i];
+                    lastGuess += props.currGuess[i];
+                    for (let j = 0; j < props.word.length; j++) {
+                        if (props.currGuess[i] === props.word[j]){
+                            if (i === j){
+                                letterObj["status"] = "rightSpot";
+                                break;
+                            }
+                            else {
+                                letterObj["status"] = "wrongSpot";
+                                break;
+                            }
                         }
-                        else {
-                            currGuessDict[props.currGuess[j]] = "wrongSpot";
+                        else if (props.currGuess[i] !== props.word[j] && j === i) {
+                            letterObj["status"] = "incorrect";
+                            break;
                         }
                     }
-                    else if (props.currGuess[j] !== props.word[i] && i===j) {
-                        currGuessDict[props.currGuess[j]] = "incorrect";
-                    }
+                    currGuessArr.push(letterObj);
                 }
-            }
-            props.setPrevGuesses([...props.prevGuesses, currGuessDict]);
+            props.setPrevGuesses([...props.prevGuesses, currGuessArr]);
 
             //for loop through currGuess change letter status in dictionary if needed;
 
             props.setCurrGuess([]);
+            console.log(props.prevGuesses[props.prevGuesses.length-1]);
         }
 
         //add in case where the submitted current guess is the correct word
         //  record the length of prev guesses (score) -> save as a state value
-        if (props.prevGuesses.length > 0){
-
-            let lastGuess = "";
-            console.log(props.prevGuesses[props.prevGuesses.length-1]);
-            for (const letter in props.prevGuesses[props.prevGuesses.length-1]){
-                lastGuess += letter;
-            }
-            if (lastGuess === props.word){
-                props.setScore(props.prevGuesses.length);
-            }
+        if (lastGuess === props.word){
+            props.setScore(props.prevGuesses.length + 1);
         }
         
         if (letter !== "ENTER" && letter !== "DELETE" && props.currGuess.length < 5){
@@ -94,9 +99,8 @@ const Keyboard = (props) => {
                 return (
                     <div className="keyboardRow" style={{display: "flex"}} key={i}>
                         {row.map((letter, idx) => {
-                            const status = letterDictionary[letter];
                             return (
-                                <Letter className={"styles." + status} onClickFunction={clickKeyboard} letter={letter} key={idx}/>
+                                <Letter className={letter['status']} onClickFunction={clickKeyboard} letter={letter} key={idx}/>
                             );
                         })}
                     </div>
