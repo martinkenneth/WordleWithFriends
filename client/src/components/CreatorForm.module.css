@@ -1,7 +1,6 @@
 .creatorForm {
     display: flex;
     flex-direction: column;
-    /* temporary styling */
     width: 400px;
 }
 
@@ -21,11 +20,9 @@
 }
 
 .creatorForm span {
-    /* padding: 2px; */
     background-color: #53ad5c;
     font-size: 16pt;
     font-weight: 600;
-    /* margin-right: 3px; */
 }
 .creatorForm > form {
     display: flex;
@@ -45,5 +42,5 @@
     font-size: 14pt;
 }
 .errorMsg {
-    color: rgb(193, 0, 0);
+    color: rgb(255, 76, 76);
 }
