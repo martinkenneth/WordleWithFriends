@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./CreatorForm.module.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+var CryptoJS = require("crypto-js");
 
 const initForm = {
     name: "",
@@ -20,6 +21,30 @@ const CreatorForm = () => {
         window.location.reload(false);
     };
 
+    // Encrypt
+    const encryptObj = (data) => {
+        let encryptedObject = encodeURIComponent(
+            CryptoJS.AES.encrypt(JSON.stringify(data), "secret-key").toString()
+        );
+        //log encrypted data
+        console.log("Encrypt Data -");
+        console.log(encryptedObject);
+
+        // const bytes = decodeURIComponent(
+        //     CryptoJS.AES.decrypt(encryptedObject, "secret-key")
+        // );
+        // const decryptedObject = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        // console.log(decryptedObject);
+        // var bytes = decodeURIComponent(
+        //     CryptoJS.AES.decrypt(encryptedObject, "secret-key")
+        // );
+        // var decryptedObject = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        // console.log(decryptedObject);
+
+        return encryptedObject;
+    };
+    // U2FsdGVkX1+wxvXvwLC08d6lcPor21LdIhAKYbJADBic0uTojG1wXeH+gVt8Y0mWMjU1GK5cIJbeD6GLRqKalEZ01llQ==
+    // U2FsdGVkX19xblCMVPor21LdP+Bejg9o27DtcR3F/83UK10a6sOOxs7qXFfJkPgNOa5fh/60bfhsp5ZGZJrSaEjtGBEA==
     /*=========================================================================
         React Hooks
     =========================================================================*/
@@ -30,11 +55,6 @@ const CreatorForm = () => {
     // const [creator, setCreator] = useState();
     const [creatorId, setCreatorId] = useState(null);
     const history = useHistory();
-
-    // useEffect(() => {
-    //     console.log("UseEffect Triggered");
-    //     // history.push(`/${creatorId}${form.name}=${form.word}`);
-    // }, [creatorId]);
 
     /*=========================================================================
         Handle API Request with AXIOS
@@ -50,12 +70,18 @@ const CreatorForm = () => {
             .then((response) => {
                 console.log("Creator ID:", response.data.id);
                 console.log(response);
-                // setCreatorId(response.data.id);
-                // history.push("/guesserView");
-                history.push(`/${response.data.id}/${form.name}=${form.word}`);
+                // Testing Hashed URLS ======================================
+                // encryptObj({ ...form, id: response.data.id });
+                history.push(
+                    `/creator/${encryptObj({
+                        ...form,
+                        id: response.data.id,
+                    })}`
+                );
                 refreshPage();
-                // history.goBack();
-                // setForm(response.data);
+                // ==========================================================
+                // history.push(`/${response.data.id}/${form.name}=${form.word}`);
+                // refreshPage();
             })
             .catch((err) => {
                 console.log("ERROR", err);
@@ -66,12 +92,9 @@ const CreatorForm = () => {
         axios
             .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${form.word}`)
             .then((response) => {
-                // console.log(response.data.products);
                 console.log(response);
-                // history.push(`/guesserView`);
                 setAPIResp(true);
                 postAPI();
-                // Maybe next axios post within here?
             })
             .catch((err) => {
                 console.log(err);
@@ -144,17 +167,6 @@ const CreatorForm = () => {
             // history.push("/guesserView");
             callWordAPI();
         }
-        // Use history maybe within a useEffect or within the .then?
-        // since creatorId STATE will be one iteration behind
-        // console.log("Within Handle Submit:", creatorId);
-    };
-
-    const handleSubmit2 = (e) => {
-        e.preventDefault();
-        history.push("/guesserView");
-        refreshPage();
-        // this.forceUpdate();
-        // history.goBack();
     };
 
     const handleChange = (e) => {
