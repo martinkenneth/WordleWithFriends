@@ -21,15 +21,13 @@ const CreatorForm = () => {
         window.location.reload(false);
     };
 
-    // Encrypt
+    /*=========================================================================
+        Encryption with Crypt-JS
+    =========================================================================*/
     const encryptObj = (data) => {
         let encryptedObject = encodeURIComponent(
             CryptoJS.AES.encrypt(JSON.stringify(data), "secret-key").toString()
         );
-
-        //log encrypted data
-        // console.log("Encrypt Data -");
-        // console.log(encryptedObject);
 
         return encryptedObject;
     };
@@ -38,10 +36,6 @@ const CreatorForm = () => {
     =========================================================================*/
     const [form, setForm] = useState(initForm);
     const [errors, setErrors] = useState(initErrors);
-    const [APIResp, setAPIResp] = useState(false);
-    // We can pass creator obj as a state or just their ID
-    // const [creator, setCreator] = useState();
-    // const [creatorId, setCreatorId] = useState(null);
     const history = useHistory();
 
     /*=========================================================================
@@ -81,7 +75,7 @@ const CreatorForm = () => {
             .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${form.word}`)
             .then((response) => {
                 console.log(response);
-                setAPIResp(true);
+                // setAPIResp(true);
                 postAPI();
             })
             .catch((err) => {
@@ -155,7 +149,7 @@ const CreatorForm = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
+        setForm({ ...form, [name]: value.toUpperCase() });
     };
 
     return (

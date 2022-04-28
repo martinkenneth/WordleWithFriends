@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Header from '../components/Header';
-import Keyboard from '../components/Keyboard';
-import style from "./GuesserView.modules.css";
+import Header from "../components/Header";
+import Keyboard from "../components/Keyboard";
+import Modal from "../components/Modal";
+import styles from "./GuesserView.module.css";
 var CryptoJS = require("crypto-js");
 
 const GuesserView = () => {
@@ -37,10 +38,9 @@ const GuesserView = () => {
     }, []);
 
     return (
-        <div>
+        <div className={styles.GuesserView}>
             {data ? (
                 <div>
-                    <Header />
                     {/* insert creator's name below this will come from the link*/}
                     <h2>You have 6 tries to guess {data.name}'s word</h2>
 
@@ -61,16 +61,26 @@ const GuesserView = () => {
                                     <tr className="wordRow" key={i}>
                                         {word.map((letter, idx) => {
                                             return (
-                                                <td className={letter["status"]} key={idx}>{letter["letterVal"]}</td>
+                                                <td
+                                                    className={letter["status"]}
+                                                    key={idx}
+                                                >
+                                                    {letter["letterVal"]}
+                                                </td>
                                             );
                                         })}
                                     </tr>
-                                )
+                                );
                             })}
                             <tr>
                                 {currGuess.map((letter, idx) => {
                                     return (
-                                        <td className='currGuessLetter' key={idx}>{letter}</td>
+                                        <td
+                                            className="currGuessLetter"
+                                            key={idx}
+                                        >
+                                            {letter}
+                                        </td>
                                     );
                                 })}
                             </tr>
@@ -85,15 +95,24 @@ const GuesserView = () => {
                         </tbody>
                     </table>
                     {/* insert keyboard component here */}
-                    <Keyboard setCurrGuess={setCurrGuess} setPrevGuesses={setPrevGuesses} prevGuesses={prevGuesses} currGuess={currGuess} score={score} setScore={setScore} word={word} />
+                    <Keyboard
+                        setCurrGuess={setCurrGuess}
+                        setPrevGuesses={setPrevGuesses}
+                        prevGuesses={prevGuesses}
+                        currGuess={currGuess}
+                        score={score}
+                        setScore={setScore}
+                        word={word}
+                    />
 
                     {/* ternary to check if the word was guessed (use Score state if score < 7) display modal*/}
                 </div>
             ) : (
                 <></>
             )}
+            {/* <Modal /> */}
         </div>
-    )
-}
+    );
+};
 
 export default GuesserView;

@@ -31,7 +31,7 @@ const Leaderboard = (props) => {
 
     return (
         <div className={styles.Leaderboard}>
-            <p>{props.name}'s Leaderboard</p>
+            <p>{props.name}'S LEADERBOARD</p>
             {/* {JSON.stringify(guessers)} */}
             <table>
                 <tbody>

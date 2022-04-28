@@ -1,5 +1,11 @@
-
-.incorrect, .rightSpot, .wrongSpot , .currGuessLetter {
+.GuesserView {
+    display: flex;
+    justify-content: center;
+}
+.incorrect,
+.rightSpot,
+.wrongSpot,
+.currGuessLetter {
     width: 25px;
     height: 25px;
     color: white;
