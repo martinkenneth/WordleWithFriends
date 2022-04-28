@@ -26,25 +26,13 @@ const CreatorForm = () => {
         let encryptedObject = encodeURIComponent(
             CryptoJS.AES.encrypt(JSON.stringify(data), "secret-key").toString()
         );
-        //log encrypted data
-        console.log("Encrypt Data -");
-        console.log(encryptedObject);
 
-        // const bytes = decodeURIComponent(
-        //     CryptoJS.AES.decrypt(encryptedObject, "secret-key")
-        // );
-        // const decryptedObject = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-        // console.log(decryptedObject);
-        // var bytes = decodeURIComponent(
-        //     CryptoJS.AES.decrypt(encryptedObject, "secret-key")
-        // );
-        // var decryptedObject = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-        // console.log(decryptedObject);
+        //log encrypted data
+        // console.log("Encrypt Data -");
+        // console.log(encryptedObject);
 
         return encryptedObject;
     };
-    // U2FsdGVkX1+wxvXvwLC08d6lcPor21LdIhAKYbJADBic0uTojG1wXeH+gVt8Y0mWMjU1GK5cIJbeD6GLRqKalEZ01llQ==
-    // U2FsdGVkX19xblCMVPor21LdP+Bejg9o27DtcR3F/83UK10a6sOOxs7qXFfJkPgNOa5fh/60bfhsp5ZGZJrSaEjtGBEA==
     /*=========================================================================
         React Hooks
     =========================================================================*/
@@ -53,7 +41,7 @@ const CreatorForm = () => {
     const [APIResp, setAPIResp] = useState(false);
     // We can pass creator obj as a state or just their ID
     // const [creator, setCreator] = useState();
-    const [creatorId, setCreatorId] = useState(null);
+    // const [creatorId, setCreatorId] = useState(null);
     const history = useHistory();
 
     /*=========================================================================
@@ -149,7 +137,6 @@ const CreatorForm = () => {
         //redirect to creatorView page... route to redirect to will be in app.js\
         let validNameFlag = true,
             validWordFlag = true;
-        // Name Valid?
         if (!form.name) {
             validNameFlag = false;
         }
@@ -161,10 +148,7 @@ const CreatorForm = () => {
             nameValid: validNameFlag,
             wordValid: validWordFlag,
         });
-        // Word == 5?
-        // is word a valid word in dictionary?
         if (validNameFlag && validWordFlag) {
-            // history.push("/guesserView");
             callWordAPI();
         }
     };
@@ -175,27 +159,46 @@ const CreatorForm = () => {
     };
 
     return (
-        <div>
-            {JSON.stringify(form)};
-            <form
-                className={styles.creatorForm}
-                onSubmit={handleSubmission}
-                autoComplete="off"
-            >
+        <div className={styles.creatorForm}>
+            {/* {JSON.stringify(form)}; */}
+            <div>
+                <p>
+                    Create a{" "}
+                    <a href="https://www.nytimes.com/games/wordle/index.html">
+                        <span style={{ padding: "0px 5px" }}>W</span>
+                        <span style={{ padding: "0px 7px" }}>O</span>
+                        <span style={{ padding: "0px 9px" }}>R</span>
+                        <span style={{ padding: "0px 8px" }}>D</span>
+                        <span style={{ padding: "0px 11px" }}>L</span>
+                    </a>{" "}
+                    game and send the share link with your friends!
+                </p>
+            </div>
+            <form onSubmit={handleSubmission} autoComplete="off">
                 <input
                     type="text"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
+                    placeholder="Enter Name"
                 />
-                {errors.nameValid ? <></> : <p>{errors.nameMsg}</p>}
+                {errors.nameValid ? (
+                    <></>
+                ) : (
+                    <p className={styles.errorMsg}>{errors.nameMsg}</p>
+                )}
                 <input
                     type="text"
                     name="word"
                     value={form.word}
                     onChange={handleChange}
+                    placeholder="Enter Word"
                 />
-                {errors.wordValid ? <></> : <p>{errors.wordMsg}</p>}
+                {errors.wordValid ? (
+                    <></>
+                ) : (
+                    <p className={styles.errorMsg}>{errors.wordMsg}</p>
+                )}
                 <input type="submit" value="Submit" />
             </form>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "./Leaderboard.module.css";
 
 const Leaderboard = (props) => {
     /*
@@ -29,13 +30,12 @@ const Leaderboard = (props) => {
     */
 
     return (
-        <div>
-            <h1>{props.name}'s Wordle Leaderboard</h1>
-            {JSON.stringify(guessers)}
+        <div className={styles.Leaderboard}>
+            <p>{props.name}'s Leaderboard</p>
+            {/* {JSON.stringify(guessers)} */}
             <table>
                 <tbody>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Score</th>
                     </tr>
@@ -49,7 +49,6 @@ const Leaderboard = (props) => {
                     {guessers.map((guesser, idx) => {
                         return (
                             <tr key={idx}>
-                                <td>{guesser.id}</td>
                                 <td>{guesser.name}</td>
                                 <td>{guesser.attempts}/6</td>
                                 {/* <td>{guesser.time}</td> */}

@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import styles from "./Header.module.css";
 
 const Header = () => {
     return (
-        <h1>Wordles With Friends</h1>
-    )
-}
+        <div className={styles.Header}>
+            <a href="http://localhost:3000/">Wordles With Friends</a>
+        </div>
+    );
+};
 
 export default Header;

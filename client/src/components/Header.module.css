@@ -1,0 +1,15 @@
+.Header {
+    width: 100%;
+    background-color: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 28pt;
+    /* font-style: italic; */
+}
+
+.Header a {
+    text-decoration: none;
+    color: whitesmoke;
+}
