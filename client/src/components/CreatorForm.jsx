@@ -16,6 +16,10 @@ const initErrors = {
 };
 
 const CreatorForm = () => {
+    const refreshPage = () => {
+        window.location.reload(false);
+    };
+
     /*=========================================================================
         React Hooks
     =========================================================================*/
@@ -26,6 +30,11 @@ const CreatorForm = () => {
     // const [creator, setCreator] = useState();
     const [creatorId, setCreatorId] = useState(null);
     const history = useHistory();
+
+    // useEffect(() => {
+    //     console.log("UseEffect Triggered");
+    //     // history.push(`/${creatorId}${form.name}=${form.word}`);
+    // }, [creatorId]);
 
     /*=========================================================================
         Handle API Request with AXIOS
@@ -41,7 +50,11 @@ const CreatorForm = () => {
             .then((response) => {
                 console.log("Creator ID:", response.data.id);
                 console.log(response);
-                setCreatorId(response.data.id);
+                // setCreatorId(response.data.id);
+                // history.push("/guesserView");
+                history.push(`/${response.data.id}/${form.name}=${form.word}`);
+                refreshPage();
+                // history.goBack();
                 // setForm(response.data);
             })
             .catch((err) => {
@@ -55,6 +68,7 @@ const CreatorForm = () => {
             .then((response) => {
                 // console.log(response.data.products);
                 console.log(response);
+                // history.push(`/guesserView`);
                 setAPIResp(true);
                 postAPI();
                 // Maybe next axios post within here?
@@ -127,11 +141,20 @@ const CreatorForm = () => {
         // Word == 5?
         // is word a valid word in dictionary?
         if (validNameFlag && validWordFlag) {
+            // history.push("/guesserView");
             callWordAPI();
         }
         // Use history maybe within a useEffect or within the .then?
         // since creatorId STATE will be one iteration behind
         // console.log("Within Handle Submit:", creatorId);
+    };
+
+    const handleSubmit2 = (e) => {
+        e.preventDefault();
+        history.push("/guesserView");
+        refreshPage();
+        // this.forceUpdate();
+        // history.goBack();
     };
 
     const handleChange = (e) => {
