@@ -12,14 +12,13 @@ const GuesserView = () => {
 
     const [data, setData] = useState(null);
     const [prevGuesses, setPrevGuesses] = useState([]);
-    const [currGuess, setCurrGuess] = useState(["","","","",""]);
+    const [currGuess, setCurrGuess] = useState(["", "", "", "", ""]);
     const { encryptedObj } = useParams();
 
     const [score, setScore] = useState(7);
     const [word, setWord] = useState("");
 
     const [gameOver, setGameOver] = useState(false);
-
 
     useEffect(() => {
         console.log(encryptedObj);
@@ -41,9 +40,9 @@ const GuesserView = () => {
     }, []);
 
     const empty = [];
-    for (let i = 0; i < 5-prevGuesses.length; i++){
+    for (let i = 0; i < 5 - prevGuesses.length; i++) {
         let row = [];
-        for (let j = 0; j < 5; j++){
+        for (let j = 0; j < 5; j++) {
             row.push(j);
         }
         empty.push(row);
@@ -94,7 +93,12 @@ const GuesserView = () => {
                                     <tr>
                                         {currGuess.map((letter, idx) => {
                                             return (
-                                                <td className={letter !== "" ? "currGuessLetter" : "emptyBox"}
+                                                <td
+                                                    className={
+                                                        letter !== ""
+                                                            ? "currGuessLetter"
+                                                            : "emptyBox"
+                                                    }
                                                     key={idx}
                                                 >
                                                     {letter}
@@ -105,16 +109,16 @@ const GuesserView = () => {
                                     {empty.map((emptyRow, i) => {
                                         return (
                                             <tr className="emptyRow" key={i}>
-                                                {emptyRow.map((emptyBox, idx) => {
-                                                    return (
-                                                        <td
-                                                            className=
-                                                                "emptyBox"
-                                                            key={idx}
-                                                        >
-                                                        </td>
-                                                    );
-                                                })}
+                                                {emptyRow.map(
+                                                    (emptyBox, idx) => {
+                                                        return (
+                                                            <td
+                                                                className="emptyBox"
+                                                                key={idx}
+                                                            ></td>
+                                                        );
+                                                    }
+                                                )}
                                             </tr>
                                         );
                                     })}
@@ -148,7 +152,7 @@ const GuesserView = () => {
                         {/* ternary to check if the word was guessed (use Score state if gameOver === true) display modal*/}
                     </div>
                     {gameOver ? (
-                        <Modal creatorId={data.id} score={score} />
+                        <Modal creatorId={data.id} score={score} word={word} />
                     ) : (
                         <div></div>
                     )}

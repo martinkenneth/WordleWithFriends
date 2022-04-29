@@ -52,7 +52,10 @@ const Modal = (props) => {
         <div className={styles.Modal}>
             <h1>Thanks for playing!</h1>
             {props.score === 10 ? (
-                <h3>You didn't solve the word!</h3>
+                <div style={{ "text-align": "center" }}>
+                    <h3>You didn't solve the word!</h3>
+                    <h3>The word was: {props.word}</h3>
+                </div>
             ) : (
                 <h3>Score: {props.score}</h3>
             )}
