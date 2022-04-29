@@ -14,7 +14,7 @@ import com.kennethmartin.wordle.models.Guesser;
 import com.kennethmartin.wordle.services.MainService;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8080" })
+// @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8080" })
 public class APIController {
 	@Autowired
 	private MainService mainService;
