@@ -1,9 +1,8 @@
-.incorrect,
-.rightSpot,
-.wrongSpot,
-.default{
-    width: 25px;
-    height: 25px;
+.keyboardRow {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-bottom: 3px;
 }
 
 .incorrect,
@@ -14,6 +13,9 @@
 .delete {
     color: white;
     text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 16pt;
 }
 
 .incorrect {
@@ -33,6 +35,15 @@
 .delete,
 .enter {
     background-color: #818384;
-    font-weight: bolder;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    /* font-weight: bolder; */
 }
 
+.delete,
+.enter {
+    width: 75px;
+    height: 50px;
+}
