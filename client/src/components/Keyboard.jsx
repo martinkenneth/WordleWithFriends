@@ -82,8 +82,9 @@ const Keyboard = (props) => {
 
         //add in case where the submitted current guess is the correct word
         //  record the length of prev guesses (score) -> save as a state value
-        if (lastGuess === props.word) {
+        if (lastGuess === props.word || (props.prevGuesses.length + 1) > 6) {
             props.setScore(props.prevGuesses.length + 1);
+            props.setGameOver(true);
         }
 
         if (letter !== "ENTER" && letter !== "DELETE" && props.currGuess.length < 5) {
