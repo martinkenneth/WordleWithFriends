@@ -46,10 +46,10 @@ const GuesserView = () => {
                     <div>
                         {/* insert creator's name below this will come from the link*/}
                         <h2>You have 6 tries to guess {data.name}'s word</h2>
-
-                        <table>
-                            <tbody>
-                                {/* use a for loop to spit out the rows
+                        <div className="center">
+                            <table>
+                                <tbody>
+                                    {/* use a for loop to spit out the rows
                         for i=0; i < guesses.length, i++
                         print out guessed words in boxes
 
@@ -59,37 +59,41 @@ const GuesserView = () => {
                         print blank boxes
                         can you do double mapping to get the word from the prevGuesses array
                         and then get each letter from the word? */}
-                                {prevGuesses.map((word, i) => {
-                                    return (
-                                        <tr className="wordRow" key={i}>
-                                            {word.map((letter, idx) => {
-                                                return (
-                                                    <td
-                                                        className={
-                                                            letter["status"]
-                                                        }
-                                                        key={idx}
-                                                    >
-                                                        {letter["letterVal"]}
-                                                    </td>
-                                                );
-                                            })}
-                                        </tr>
-                                    );
-                                })}
-                                <tr>
-                                    {currGuess.map((letter, idx) => {
+                                    {prevGuesses.map((word, i) => {
                                         return (
-                                            <td
-                                                className="currGuessLetter"
-                                                key={idx}
-                                            >
-                                                {letter}
-                                            </td>
+                                            <tr className="wordRow" key={i}>
+                                                {word.map((letter, idx) => {
+                                                    return (
+                                                        <td
+                                                            className={
+                                                                letter["status"]
+                                                            }
+                                                            key={idx}
+                                                        >
+                                                            {
+                                                                letter[
+                                                                    "letterVal"
+                                                                ]
+                                                            }
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
                                         );
                                     })}
-                                </tr>
-                                {/* how do we output empty boxes...
+                                    <tr>
+                                        {currGuess.map((letter, idx) => {
+                                            return (
+                                                <td
+                                                    className="currGuessLetter"
+                                                    key={idx}
+                                                >
+                                                    {letter}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                    {/* how do we output empty boxes...
                         {() => {
                             let emptyBoxes =
                                 (for i = 0; i < 5 - prevGuesses.length; i++) {
@@ -97,26 +101,30 @@ const GuesserView = () => {
                                 }
                             return emptyBoxes;
                         }} */}
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         {/* insert keyboard component here */}
-                        <Keyboard
-                            setCurrGuess={setCurrGuess}
-                            setPrevGuesses={setPrevGuesses}
-                            prevGuesses={prevGuesses}
-                            currGuess={currGuess}
-                            score={score}
-                            setScore={setScore}
-                            word={word}
-                            setGameOver={setGameOver}
-                        />
-                        {JSON.stringify(gameOver)}
+                        <div className="center">
+                            <Keyboard
+                                setCurrGuess={setCurrGuess}
+                                setPrevGuesses={setPrevGuesses}
+                                prevGuesses={prevGuesses}
+                                currGuess={currGuess}
+                                score={score}
+                                setScore={setScore}
+                                word={word}
+                                setGameOver={setGameOver}
+                            />
+                        </div>
+                        {/* {JSON.stringify(gameOver)} */}
                         {/* ternary to check if the word was guessed (use Score state if gameOver === true) display modal*/}
                     </div>
-                    {gameOver ?
-                        (<Modal creatorId={data.id} score={score} />) :
-                        (<div></div>)
-                    }
+                    {gameOver ? (
+                        <Modal creatorId={data.id} score={score} />
+                    ) : (
+                        <div></div>
+                    )}
                 </div>
             ) : (
                 <></>
