@@ -16,7 +16,7 @@ const GuesserView = () => {
     const { encryptedObj } = useParams();
 
     const [score, setScore] = useState(7);
-    const [word, setWord] = useState("CODER");
+    const [word, setWord] = useState("");
 
     const [gameOver, setGameOver] = useState(false);
 
