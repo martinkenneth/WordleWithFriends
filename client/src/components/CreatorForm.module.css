@@ -40,6 +40,7 @@
 .creatorForm > form > input[type="submit"] {
     padding: 10px;
     font-size: 14pt;
+    cursor: pointer;
 }
 .errorMsg {
     color: rgb(255, 76, 76);
