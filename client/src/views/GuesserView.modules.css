@@ -60,3 +60,8 @@
 .currGuessLetter {
     background-color: #121214;
 }
+
+.emptyBox {
+    background-color: #222222;
+    border: thin solid #3a3a3b;
+}

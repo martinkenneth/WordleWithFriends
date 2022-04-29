@@ -12,13 +12,14 @@ const GuesserView = () => {
 
     const [data, setData] = useState(null);
     const [prevGuesses, setPrevGuesses] = useState([]);
-    const [currGuess, setCurrGuess] = useState([]);
+    const [currGuess, setCurrGuess] = useState(["","","","",""]);
     const { encryptedObj } = useParams();
 
     const [score, setScore] = useState(7);
     const [word, setWord] = useState("");
 
     const [gameOver, setGameOver] = useState(false);
+
 
     useEffect(() => {
         console.log(encryptedObj);
@@ -38,6 +39,15 @@ const GuesserView = () => {
         // const { id, name, word } = decryptedObject;
         console.log(decryptedObj);
     }, []);
+
+    const empty = [];
+    for (let i = 0; i < 5-prevGuesses.length; i++){
+        let row = [];
+        for (let j = 0; j < 5; j++){
+            row.push(j);
+        }
+        empty.push(row);
+    }
 
     return (
         <div>
@@ -84,8 +94,7 @@ const GuesserView = () => {
                                     <tr>
                                         {currGuess.map((letter, idx) => {
                                             return (
-                                                <td
-                                                    className="currGuessLetter"
+                                                <td className={letter !== "" ? "currGuessLetter" : "emptyBox"}
                                                     key={idx}
                                                 >
                                                     {letter}
@@ -93,6 +102,22 @@ const GuesserView = () => {
                                             );
                                         })}
                                     </tr>
+                                    {empty.map((emptyRow, i) => {
+                                        return (
+                                            <tr className="emptyRow" key={i}>
+                                                {emptyRow.map((emptyBox, idx) => {
+                                                    return (
+                                                        <td
+                                                            className=
+                                                                "emptyBox"
+                                                            key={idx}
+                                                        >
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        );
+                                    })}
                                     {/* how do we output empty boxes...
                         {() => {
                             let emptyBoxes =

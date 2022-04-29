@@ -39,7 +39,7 @@ const Keyboard = (props) => {
         //creating string of the last guess to compare to the word string in order to trigger setScore
         let lastGuess = "";
 
-        if (letter === "ENTER" && props.currGuess.length === 5) {
+        if (letter === "ENTER" && !props.currGuess.includes("")) {
             let currGuessArr = [];
             for (let i = 0; i < props.currGuess.length; i++) {
                 let letterObj = {};
@@ -78,7 +78,7 @@ const Keyboard = (props) => {
 
             //for loop through currGuess change letter status in dictionary if needed;
 
-            props.setCurrGuess([]);
+            props.setCurrGuess(["","","","",""]);
             console.log(props.prevGuesses[props.prevGuesses.length - 1]);
             console.log(letterDictionary);
         }
@@ -93,11 +93,21 @@ const Keyboard = (props) => {
         if (
             letter !== "ENTER" &&
             letter !== "DELETE" &&
-            props.currGuess.length < 5
+            props.currGuess.length < 6
         ) {
-            props.setCurrGuess([...props.currGuess, letter]);
+            if (props.currGuess.includes("")){
+                let index = props.currGuess.indexOf("");
+                props.currGuess[index] = letter;
+            }
+            props.setCurrGuess([...props.currGuess]);
         } else if (letter === "DELETE") {
-            props.currGuess.pop();
+            let index = props.currGuess.length - 1;
+            for (let i = 0; i < props.currGuess.length - 1; i++){
+                if (props.currGuess[i] !== "" && props.currGuess[i+1] === ""){
+                    index = i;
+                }
+            }
+            props.currGuess[index] = "";
             props.setCurrGuess([...props.currGuess]);
         }
     };
