@@ -50,7 +50,12 @@ const Leaderboard = (props) => {
                         return (
                             <tr key={idx}>
                                 <td>{guesser.name}</td>
-                                <td>{guesser.attempts}/6</td>
+                                {guesser.attempts === 10 ? (
+                                    <td>X</td>
+                                ) : (
+                                    <td>{guesser.attempts}/6</td>
+                                )}
+                                {/* <td>{guesser.attempts}/6</td> */}
                                 {/* <td>{guesser.time}</td> */}
                             </tr>
                         );

@@ -51,7 +51,11 @@ const Modal = (props) => {
     return (
         <div className={styles.Modal}>
             <h1>Thanks for playing!</h1>
-            <h3>Score: {props.score}</h3>
+            {props.score === 10 ? (
+                <h3>You didn't solve the word!</h3>
+            ) : (
+                <h3>Score: {props.score}</h3>
+            )}
             <form onSubmit={handleSubmission} autoComplete="off">
                 <input
                     type="text"
