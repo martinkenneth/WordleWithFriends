@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Letter from "./Letter";
 import style from "./Keyboard.modules.css";
+import axios from "axios";
 
 const Keyboard = (props) => {
     const [letterDictionary, setLetterDictionary] = useState({});
     const [isLoaded, setIsLoded] = useState(false);
+    const [validWord, setValidWord] = useState(false);
 
     const letterVals = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -29,6 +31,28 @@ const Keyboard = (props) => {
         setIsLoded(true);
     }, []);
 
+    // const callWordAPI = () => {
+    //     // let flag = false;
+    //     axios
+    //         .get(
+    //             `https://api.dictionaryapi.dev/api/v2/entries/en/${props.currGuess.join(
+    //                 ""
+    //             )}`
+    //         )
+    //         .then((response) => {
+    //             console.log(response);
+    //             // setAPIResp(true);
+    //             setValidWord(true);
+    //             // flag = true;
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //             setValidWord(false);
+    //             // flag = false;
+    //         });
+    //     // return flag;
+    // };
+
     const clickKeyboard = (letter) => {
         /*
         if the value of the click key is enter and the currGuess.length == 5
@@ -40,70 +64,100 @@ const Keyboard = (props) => {
         let lastGuess = "";
 
         if (letter === "ENTER" && !props.currGuess.includes("")) {
-            let currGuessArr = [];
-            for (let i = 0; i < props.currGuess.length; i++) {
-                let letterObj = {};
-                letterObj["letterVal"] = props.currGuess[i];
-                lastGuess += props.currGuess[i];
-                for (let j = 0; j < props.word.length; j++) {
-                    if (props.currGuess[i] === props.word[j]) {
-                        if (i === j) {
-                            letterObj["status"] = "rightSpot";
-                            letterDictionary[props.currGuess[i]] = "rightSpot";
-                            break;
-                        } else {
-                            letterObj["status"] = "wrongSpot";
-                            if (
-                                letterDictionary[props.currGuess[i]] !==
-                                "rightSpot"
+            axios
+                .get(
+                    `https://api.dictionaryapi.dev/api/v2/entries/en/${props.currGuess.join(
+                        ""
+                    )}`
+                )
+                .then((response) => {
+                    console.log(response);
+                    let currGuessArr = [];
+                    for (let i = 0; i < props.currGuess.length; i++) {
+                        let letterObj = {};
+                        letterObj["letterVal"] = props.currGuess[i];
+                        lastGuess += props.currGuess[i];
+                        for (let j = 0; j < props.word.length; j++) {
+                            if (props.currGuess[i] === props.word[j]) {
+                                if (i === j) {
+                                    letterObj["status"] = "rightSpot";
+                                    letterDictionary[props.currGuess[i]] =
+                                        "rightSpot";
+                                    break;
+                                } else {
+                                    letterObj["status"] = "wrongSpot";
+                                    if (
+                                        letterDictionary[props.currGuess[i]] !==
+                                        "rightSpot"
+                                    ) {
+                                        letterDictionary[props.currGuess[i]] =
+                                            "wrongSpot";
+                                    }
+                                    break;
+                                }
+                            } else if (
+                                props.currGuess[i] !== props.word[j] &&
+                                j === i
                             ) {
+                                letterObj["status"] = "incorrect";
                                 letterDictionary[props.currGuess[i]] =
-                                    "wrongSpot";
+                                    "incorrect";
+                                break;
                             }
-                            break;
                         }
-                    } else if (
-                        props.currGuess[i] !== props.word[j] &&
-                        j === i
-                    ) {
-                        letterObj["status"] = "incorrect";
-                        letterDictionary[props.currGuess[i]] = "incorrect";
-                        break;
+                        setLetterDictionary({ ...letterDictionary });
+                        currGuessArr.push(letterObj);
                     }
-                }
-                setLetterDictionary({ ...letterDictionary });
-                currGuessArr.push(letterObj);
-            }
-            props.setPrevGuesses([...props.prevGuesses, currGuessArr]);
+                    props.setPrevGuesses([...props.prevGuesses, currGuessArr]);
 
-            //for loop through currGuess change letter status in dictionary if needed;
+                    //for loop through currGuess change letter status in dictionary if needed;
 
-            props.setCurrGuess(["","","","",""]);
-            console.log(props.prevGuesses[props.prevGuesses.length - 1]);
-            console.log(letterDictionary);
+                    props.setCurrGuess(["", "", "", "", ""]);
+                    console.log(
+                        props.prevGuesses[props.prevGuesses.length - 1]
+                    );
+                    console.log(letterDictionary);
+
+                    if (
+                        lastGuess === props.word ||
+                        props.prevGuesses.length + 2 > 6
+                    ) {
+                        props.setScore(props.prevGuesses.length + 1);
+                        if (lastGuess != props.word) {
+                            props.setScore(10);
+                        }
+                        props.setGameOver(true);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
 
         //add in case where the submitted current guess is the correct word
         //  record the length of prev guesses (score) -> save as a state value
-        if (lastGuess === props.word || props.prevGuesses.length + 1 > 6) {
-            props.setScore(props.prevGuesses.length + 1);
-            props.setGameOver(true);
-        }
+        // if (lastGuess === props.word || props.prevGuesses.length + 1 > 6) {
+        //     props.setScore(props.prevGuesses.length + 1);
+        //     props.setGameOver(true);
+        // }
 
         if (
             letter !== "ENTER" &&
             letter !== "DELETE" &&
             props.currGuess.length < 6
         ) {
-            if (props.currGuess.includes("")){
+            if (props.currGuess.includes("")) {
                 let index = props.currGuess.indexOf("");
                 props.currGuess[index] = letter;
             }
             props.setCurrGuess([...props.currGuess]);
         } else if (letter === "DELETE") {
             let index = props.currGuess.length - 1;
-            for (let i = 0; i < props.currGuess.length - 1; i++){
-                if (props.currGuess[i] !== "" && props.currGuess[i+1] === ""){
+            for (let i = 0; i < props.currGuess.length - 1; i++) {
+                if (
+                    props.currGuess[i] !== "" &&
+                    props.currGuess[i + 1] === ""
+                ) {
                     index = i;
                 }
             }
