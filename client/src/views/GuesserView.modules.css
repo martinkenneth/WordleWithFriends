@@ -4,6 +4,7 @@
 }
 
 .GuesserView h2 {
+    text-align: center;
     color: whitesmoke;
     margin-top: 30px;
 }
@@ -15,6 +16,11 @@
 .center {
     display: flex;
     justify-content: center;
+}
+
+.keyboard {
+    position: absolute;
+    bottom: 200px;
 }
 .GuesserView table {
     margin-top: 30px;

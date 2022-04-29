@@ -106,6 +106,7 @@ const GuesserView = () => {
                         </div>
                         {/* insert keyboard component here */}
                         <div className="center">
+                            {/* <div className="keyboard"> */}
                             <Keyboard
                                 setCurrGuess={setCurrGuess}
                                 setPrevGuesses={setPrevGuesses}
@@ -116,6 +117,7 @@ const GuesserView = () => {
                                 word={word}
                                 setGameOver={setGameOver}
                             />
+                            {/* </div> */}
                         </div>
                         {/* {JSON.stringify(gameOver)} */}
                         {/* ternary to check if the word was guessed (use Score state if gameOver === true) display modal*/}
