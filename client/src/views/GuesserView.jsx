@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import Header from "../components/Header";
 import Keyboard from "../components/Keyboard";
 import Modal from "../components/Modal";
-import styles from "./GuesserView.module.css";
+import styles from "./GuesserView.modules.css";
 var CryptoJS = require("crypto-js");
 
 const GuesserView = () => {
@@ -17,6 +17,8 @@ const GuesserView = () => {
 
     const [score, setScore] = useState(7);
     const [word, setWord] = useState("CODER");
+
+    const [gameOver, setGameOver] = useState(false);
 
     useEffect(() => {
         console.log(encryptedObj);
@@ -40,7 +42,7 @@ const GuesserView = () => {
     return (
         <div>
             {data ? (
-                <div className={styles.GuesserView}>
+                <div className="GuesserView">
                     <div>
                         {/* insert creator's name below this will come from the link*/}
                         <h2>You have 6 tries to guess {data.name}'s word</h2>
@@ -106,11 +108,15 @@ const GuesserView = () => {
                             score={score}
                             setScore={setScore}
                             word={word}
+                            setGameOver={setGameOver}
                         />
-
-                        {/* ternary to check if the word was guessed (use Score state if score < 7) display modal*/}
+                        {JSON.stringify(gameOver)}
+                        {/* ternary to check if the word was guessed (use Score state if gameOver === true) display modal*/}
                     </div>
-                    <Modal creatorId={data.id} score={score} />
+                    {gameOver ?
+                        (<Modal creatorId={data.id} score={score} />) :
+                        (<div></div>)
+                    }
                 </div>
             ) : (
                 <></>
