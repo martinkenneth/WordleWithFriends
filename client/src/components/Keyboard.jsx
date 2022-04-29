@@ -102,7 +102,7 @@ const Keyboard = (props) => {
                                 letterObj["status"] = "incorrect";
                                 letterDictionary[props.currGuess[i]] =
                                     "incorrect";
-                                break;
+                                // break;
                             }
                         }
                         setLetterDictionary({ ...letterDictionary });
