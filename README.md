@@ -1,6 +1,6 @@
 # Wordle With Friends
 
-Full stack web app with the purpose of creating and sharing your own *[Markdown Guide](https://www.nytimes.com/games/wordle/index.html)* with friends, using: React, Java, Spring Boot, and MySQL
+Full stack web app with the purpose of creating and sharing your own *[Wordle](https://www.nytimes.com/games/wordle/index.html)* with friends, using: React, Java, Spring Boot, and MySQL
 
 ## Technologies:
 
