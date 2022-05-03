@@ -19,4 +19,4 @@ Full stack web app with the purpose of creating and sharing your own *[Wordle](h
 ### Database
 - MySQL
 
-
+![image](https://drive.google.com/file/d/1XHZIj8nmlMDImLy40g-r1uTfdsd4bbdr/view?usp=sharing)
