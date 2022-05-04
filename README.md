@@ -39,10 +39,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Demo
 
 #### Homepage
-![image](https://drive.google.com/uc?export=view&id=1XHZIj8nmlMDImLy40g-r1uTfdsd4bbdr)
+<img src="/images/home.png" alt="wordle with friends homepage">
 
 ### Game Instance
-![image](https://drive.google.com/uc?export=view&id=1WV8Ox4orQGDe0IJM6H7LdT-RKqDqOiCf)
+<img src="/images/game.png" alt="wordle with friends game instance">
 
 ### Creator Dashboard
-![image](https://drive.google.com/uc?export=view&id=1gB-lR1ROm9UkgN45MCsYd4hQ44wqh_5Y)
+<img src="/images/dashboard.png" alt="wordle with friends dashboard">
