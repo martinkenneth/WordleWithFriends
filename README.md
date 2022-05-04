@@ -1,26 +1,3 @@
-
-<h1 style={text-align:center;}>Wordles with Friends</h1>
-
-Full stack web app with the purpose of creating and sharing your own *[Wordle](https://www.nytimes.com/games/wordle/index.html)* with friends, using: React, Java, Spring Boot, and MySQL
-
-## Technologies:
-
-### Frontend
-- HTML
-- CSS
-- React
-  - Crypto-JS
-  - React-Router-Dom
-  - Axios
-
-### Backend
-- Java
-- Spring Boot
-
-### Database
-- MySQL
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
