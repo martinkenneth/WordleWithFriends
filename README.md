@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<h2 align="center">Wordles with Friends</h2>
+<h2 align="center">Wordle with Friends</h2>
   <p align="center">
     Full stack web app with the purpose of creating and sharing your own <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> with friends, using: React, Java, Spring Boot, and MySQL.
   </p>
